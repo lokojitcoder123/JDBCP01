@@ -17,7 +17,7 @@ public class ScrollInsensitive {
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/mystd", "root", "lokojit456789");
 
-            Statement statement=con.createStatement(ResultSet.TYPE_FORWARD_ONLY);
+            Statement statement=con.createStatement();
             String query ="select * from student ";
 
             ResultSet rs = statement.executeQuery(query);
