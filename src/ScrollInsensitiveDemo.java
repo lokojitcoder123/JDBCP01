@@ -1,9 +1,11 @@
+import com.mysql.cj.x.protobuf.MysqlxCursor;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class ScrollInsensitive {
+public class ScrollInsensitiveDemo {
 
     /*1. load the driver class
       2. Get connection from db
@@ -18,14 +20,26 @@ public class ScrollInsensitive {
                     "jdbc:mysql://localhost:3306/mystd", "root", "lokojit456789");
 
             Statement statement = con.
+
                     createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             String query = "select * from student ";
 
             ResultSet rs = statement.executeQuery(query);
 
-            System.out.println("----------Scroll indensitive, read oly----------");
-            System.out.println("--------------Read data----------------");
+            System.out.println("fetch data is not live update mode........");
+            Thread.sleep(10000);
+            rs.beforeFirst();
 
+            while(rs.next())
+            {
+                System.out.println(
+                        rs.getInt("id")+ " | "+
+                                rs.getString("stdName")+" | "+
+                                rs.getInt("age")
+                );
+            }
+
+            con.close();
 
             rs.last();
             System.out.println("Last Row: " + rs.getInt("id"));

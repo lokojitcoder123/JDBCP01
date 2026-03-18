@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class JDBCInsertDemo {
+
     /*1. load the driver class
       2. Get connection from db
       3. create statement
@@ -17,11 +18,18 @@ public class JDBCInsertDemo {
                     "jdbc:mysql://localhost:3306/mystd", "root", "lokojit456789");
 
             Statement statement=con.createStatement();
-            //String query ="select * from student ";
-             String query = "INSERT INTO student (id,stdName,age) values(4,'Ankit',21)";
-            //ResultSet rs = statement.executeQuery(query);
-            int update = statement.executeUpdate(query);
-            System.out.println("Inserted"+update+"rows");
+            String query ="INSERT INTO student (id , stdName , age) values(4,'Ankit',21)";
+
+            ResultSet rs = statement.executeQuery(query);
+            System.out.println("--------------Read data----------------");
+            while(rs.next())
+            {
+                System.out.println(
+                        rs.getInt("id")+ " | "+
+                                rs.getString("stdName")+" | "+
+                                rs.getInt("age")
+                );
+            }
 
         }
         catch (Exception e)

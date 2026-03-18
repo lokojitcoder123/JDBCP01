@@ -18,7 +18,7 @@ public class JDBCDemo {
                     "jdbc:mysql://localhost:3306/mystd", "root", "lokojit456789");
 
             Statement statement=con.createStatement();
-            String query ="select * from student ";
+            String query ="select * from student where id = 2";
 
             ResultSet rs = statement.executeQuery(query);
             System.out.println("--------------Read data----------------");
